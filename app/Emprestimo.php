@@ -1,5 +1,5 @@
 <?php
-
+namespace App;
 class Emprestimo{
     public $id;
     public $item;
