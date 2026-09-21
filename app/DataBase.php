@@ -9,7 +9,10 @@ class DataBase{
     const DB = 'reserva';
     private $connection;
     private $table;
-
+public function __construct($table = null){
+    $this->table = $table;
+    $this->setConnection();
+}
     private function setConnection(){
         try{
             $this->connection = new PDO('mysql:'.self::HOST.';dbname='.self::DB,self::USER,self::PASS);
@@ -19,7 +22,8 @@ class DataBase{
         }        
     }
     public function insert($array){
-
+        $query = "INSERT INTO item (nome, descricao, patrimonio)
+        VALUES ('Data Show','','147895')";
     }
     public function update($id,$array){
         

@@ -6,7 +6,7 @@ class Item{
     public $descricao;
     public $patrimonio;
     public function cadastrar(){    
-        $db = new DataBase();
+        $db = new DataBase('item');
         $db->insert([
             "nome"=> $this->nome,
             "descricao" => $this->descricao,
