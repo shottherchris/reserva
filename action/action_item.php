@@ -10,7 +10,8 @@ switch($action){
         $item->descricao = $_POST['descricao'];
         $item->patrimonio = $_POST['patrimonio'];
         $item->cadastrar();
-        header('location: /reserva/view/item/listar.php');
+        exit;
+       // header('location: /reserva/view/item/listar.php');
         echo "<pre>";
         print_r($item);
         echo "<pre>";
