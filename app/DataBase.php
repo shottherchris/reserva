@@ -1,7 +1,7 @@
 <?php
 namespace App;
 use PDO;
-use PDOExecption;
+use PDOException;
 class DataBase{
     const HOST = 'localhost';
     const USER = 'root';
@@ -15,9 +15,10 @@ public function __construct($table = null){
 }
     private function setConnection(){
         try{
-            $this->connection = new PDO('mysql:'.self::HOST.';dbname='.self::DB,self::USER,self::PASS);
-            //$this->connection->setAtribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXECEPTION);
-        }catch(PDOExecption $e){
+            $this->connection = new PDO
+            ('mysql:host='.self::HOST.';dbname='.self::DB,self::USER,self::PASS);
+            $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }catch(PDOException $e){
             die('ERROR: '.$e->getMessage());
         }        
     }
@@ -29,7 +30,7 @@ public function __construct($table = null){
             $statement = $this->connection->prepare($query);
             $statement->execute($values);
             return $statement;
-        }catch(PDOExecption $e){
+        }catch(PDOException $e){
             die('ERROR: '. $e->getMessage());
         }
 
