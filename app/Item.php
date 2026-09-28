@@ -1,5 +1,6 @@
 <?php
 namespace App;
+USE PDO;
 class Item{
     public $id;
     public $nome;
@@ -14,12 +15,17 @@ class Item{
         ]);
         return true;        
     }
-    public function alterar(){        
-        return true;
+    public function alterar(){
+        return (new Database('item'))->update($this->id,[
+            "nome"  => $this->nome,
+            "descricao" => $this->descricao,
+            "patrimonio" => $this->patrimonio
+        ]);
     }
     public function excluir(){
+        return (new DataBase('item'))->delete('id=' .$this->id);
     }
-    public function listar(){
-
+    public static function listar($where = null, $order = null, $limit = null){
+        return (new DataBase('item'))->select()->fetchAll(PDO::FETCH_CLASS, self::class);
     } 
 }

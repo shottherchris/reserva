@@ -1,5 +1,5 @@
-create database sistema_reserva;
-use sistema_reserva;
+create database reserva;
+use reserva;
 create table item(
     id int auto_increment primary key,
     nome varchar(20),

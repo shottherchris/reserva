@@ -33,7 +33,6 @@ public function __construct($table = null){
         }catch(PDOException $e){
             die('ERROR: '. $e->getMessage());
         }
-
     }
     public function insert($array){
         $query = "INSERT INTO item (nome, descricao, patrimonio) VALUES ('Data Show','','147895')";
@@ -42,14 +41,32 @@ public function __construct($table = null){
         $query = "INSERT INTO ".$this->table." (".implode(', ',$fields). ")
         VALUES(" . implode(', ',$binds).")";
         $this->execute($query,array_values($array));
+        return $this -> connection->lastInsertId();
     }
-    public function update($id,$array){
+    public function select($where = null, $order = null, $limit = null, $fields = '*'){
+        $query = "SELECT * FROM " . $this->table;
+        $where = strlen($where) ? ' WHERE '. $where : '';
+        $order = strlen($order) ? ' ORDER BY '. $order : '';
+        $limit = strlen($limit) ? ' LIMIT '. $limit: '';
+
+        $query = "SELECT ". $fields ."  FROM  " .$this->table . $where . $order . $limit ;
+        return $this->execute($query);
+
         
     }
-    public function delete($id){
+
+
+    public function update($where,$array){
+        $fields = array_keys($array);
+        $query = "UPDATE ".$this->table." SET ".implode('=?, ',$fields).'=? WHERE ' .$where;
+        $this ->execute($query, array_values($array));
+        return true;
         
     }
-    public function select(){
-        
+    public function delete($where){
+        $query = "DELETE FROM ". $this->table." WHERE ".$where;
+        $this->execute($query);
+        return true;
+
     }
 }
